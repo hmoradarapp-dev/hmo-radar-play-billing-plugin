@@ -1,0 +1,8 @@
+// Copyright 2013 The Flutter Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+export 'src/in_app_purchase_android_platform.dart';
+export 'src/in_app_purchase_android_platform_addition.dart';
+export 'src/types/types.dart';
+export 'src/strict_subscription_query.dart';

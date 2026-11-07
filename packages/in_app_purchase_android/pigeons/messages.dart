@@ -1,0 +1,502 @@
+// Copyright 2013 The Flutter Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+import 'package:pigeon/pigeon.dart';
+
+@ConfigurePigeon(
+  PigeonOptions(
+    dartOut: 'lib/src/messages.g.dart',
+    kotlinOptions: KotlinOptions(package: 'io.flutter.plugins.inapppurchase'),
+    kotlinOut: 'android/src/main/kotlin/io/flutter/plugins/inapppurchase/Messages.kt',
+    copyrightHeader: 'pigeons/copyright.txt',
+  ),
+)
+/// Pigeon version of Java QueryProductDetailsParams.Product.
+class PlatformQueryProduct {
+  PlatformQueryProduct({required this.productId, required this.productType});
+
+  final String productId;
+  final PlatformProductType productType;
+}
+
+/// Pigeon version of Java AccountIdentifiers.
+class PlatformAccountIdentifiers {
+  PlatformAccountIdentifiers({
+    required this.obfuscatedAccountId,
+    required this.obfuscatedProfileId,
+  });
+
+  final String? obfuscatedAccountId;
+  final String? obfuscatedProfileId;
+}
+
+/// Pigeon version of Java BillingResult.
+class PlatformBillingResult {
+  PlatformBillingResult({
+    required this.responseCode,
+    required this.debugMessage,
+    this.subResponseCode = 0,
+  });
+  final PlatformBillingResponse responseCode;
+  final String debugMessage;
+  final int subResponseCode;
+}
+
+/// Pigeon version of Java BillingClient.BillingResponseCode.
+enum PlatformBillingResponse {
+  serviceTimeout,
+  featureNotSupported,
+  serviceDisconnected,
+  ok,
+  userCanceled,
+  serviceUnavailable,
+  billingUnavailable,
+  itemUnavailable,
+  developerError,
+  error,
+  itemAlreadyOwned,
+  itemNotOwned,
+  networkError,
+}
+
+/// Pigeon version of Java ProductDetails.OneTimePurchaseOfferDetails.
+class PlatformOneTimePurchaseOfferDetails {
+  PlatformOneTimePurchaseOfferDetails({
+    required this.priceAmountMicros,
+    required this.formattedPrice,
+    required this.priceCurrencyCode,
+  });
+
+  final int priceAmountMicros;
+  final String formattedPrice;
+  final String priceCurrencyCode;
+}
+
+/// Pigeon version of Java ProductDetails.
+class PlatformProductDetails {
+  PlatformProductDetails({
+    required this.description,
+    required this.name,
+    required this.productId,
+    required this.productType,
+    required this.title,
+    required this.oneTimePurchaseOfferDetails,
+    required this.oneTimePurchaseOfferDetailsList,
+    required this.subscriptionOfferDetails,
+  });
+
+  final String description;
+  final String name;
+  final String productId;
+  final PlatformProductType productType;
+  final String title;
+  final PlatformOneTimePurchaseOfferDetails? oneTimePurchaseOfferDetails;
+  final List<PlatformOneTimePurchaseOfferDetails>? oneTimePurchaseOfferDetailsList;
+  final List<PlatformSubscriptionOfferDetails>? subscriptionOfferDetails;
+}
+
+/// Pigeon version of ProductDetailsResponseWrapper, which contains the
+/// components of the Java ProductDetailsResponseListener callback.
+class PlatformProductDetailsResponse {
+  PlatformProductDetailsResponse({
+    required this.billingResult,
+    required this.productDetails,
+    required this.unfetchedProductList,
+  });
+
+  final PlatformBillingResult billingResult;
+  final List<PlatformProductDetails> productDetails;
+  final List<PlatformUnfetchedProduct> unfetchedProductList;
+}
+
+/// Pigeon version of AlternativeBillingOnlyReportingDetailsWrapper, which
+/// contains the components of the Java
+/// AlternativeBillingOnlyReportingDetailsListener callback.
+class PlatformAlternativeBillingOnlyReportingDetailsResponse {
+  PlatformAlternativeBillingOnlyReportingDetailsResponse({
+    required this.billingResult,
+    required this.externalTransactionToken,
+  });
+
+  final PlatformBillingResult billingResult;
+  final String externalTransactionToken;
+}
+
+/// Response code for the in-app messaging API call.
+enum PlatformInAppMessageResponse {
+  /// The flow has finished and there is no action needed from developers.
+  ///
+  /// Note: The API callback won't indicate whether message is dismissed by the
+  /// user or there is no message available to the user.
+  noActionNeeded,
+
+  /// The subscription status changed.
+  ///
+  /// For example, a subscription has been recovered from a suspended state.
+  /// Developers should expect the purchase token to be returned with this
+  /// response code and use the purchase token with the Google Play Developer API.
+  subscriptionStatusUpdated,
+}
+
+/// Results related to in-app messaging.
+class PlatformInAppMessageResult {
+  PlatformInAppMessageResult({required this.responseCode, required this.purchaseToken});
+
+  /// Returns response code for the in-app messaging API call.
+  final PlatformInAppMessageResponse responseCode;
+
+  /// Returns token that identifies the purchase to be acknowledged, if any.
+  final String? purchaseToken;
+}
+
+/// Pigeon version of BillingConfigWrapper, which contains the components of the
+/// Java BillingConfigResponseListener callback.
+class PlatformBillingConfigResponse {
+  PlatformBillingConfigResponse({required this.billingResult, required this.countryCode});
+
+  final PlatformBillingResult billingResult;
+  final String countryCode;
+}
+
+/// Pigeon version of Java BillingFlowParams.
+class PlatformBillingFlowParams {
+  PlatformBillingFlowParams({
+    required this.product,
+    required this.replacementMode,
+    required this.offerToken,
+    required this.accountId,
+    required this.obfuscatedProfileId,
+    required this.oldProduct,
+    required this.purchaseToken,
+  });
+
+  final String product;
+  final PlatformReplacementMode replacementMode;
+  final String? offerToken;
+  final String? accountId;
+  final String? obfuscatedProfileId;
+  final String? oldProduct;
+  final String? purchaseToken;
+}
+
+enum PlatformReplacementMode {
+  unknownReplacementMode,
+  withTimeProration,
+  chargeProratedPrice,
+  withoutProration,
+  deferred,
+  chargeFullPrice,
+}
+
+/// Pigeon version of Java ProductDetails.PricingPhase.
+class PlatformPricingPhase {
+  PlatformPricingPhase({
+    required this.billingCycleCount,
+    required this.recurrenceMode,
+    required this.priceAmountMicros,
+    required this.billingPeriod,
+    required this.formattedPrice,
+    required this.priceCurrencyCode,
+  });
+
+  final int billingCycleCount;
+  final PlatformRecurrenceMode recurrenceMode;
+  final int priceAmountMicros;
+  final String billingPeriod;
+  final String formattedPrice;
+  final String priceCurrencyCode;
+}
+
+/// Pigeon version of Java Purchase.
+///
+/// See also PurchaseWrapper on the Dart side.
+class PlatformPurchase {
+  const PlatformPurchase({
+    required this.orderId,
+    required this.packageName,
+    required this.purchaseTime,
+    required this.purchaseToken,
+    required this.signature,
+    required this.products,
+    required this.isAutoRenewing,
+    required this.originalJson,
+    required this.developerPayload,
+    required this.isAcknowledged,
+    required this.quantity,
+    required this.purchaseState,
+    required this.accountIdentifiers,
+    required this.pendingPurchaseUpdate,
+  });
+
+  final String? orderId;
+  final String packageName;
+  final int purchaseTime;
+  final String purchaseToken;
+  final String signature;
+  final List<String> products;
+  final bool isAutoRenewing;
+  final String originalJson;
+  final String developerPayload;
+  final bool isAcknowledged;
+  final int quantity;
+  final PlatformPurchaseState purchaseState;
+  final PlatformAccountIdentifiers? accountIdentifiers;
+  final PlatformPendingPurchaseUpdate? pendingPurchaseUpdate;
+}
+
+/// Pigeon version of Java Purchase.
+///
+/// See also PendingPurchaseUpdateWrapper on the Dart side.
+class PlatformPendingPurchaseUpdate {
+  PlatformPendingPurchaseUpdate({required this.products, required this.purchaseToken});
+
+  final List<String> products;
+  final String purchaseToken;
+}
+
+/// Pigeon version of PurchaseHistoryRecord.
+///
+/// See also PurchaseHistoryRecordWrapper on the Dart side.
+class PlatformPurchaseHistoryRecord {
+  PlatformPurchaseHistoryRecord({
+    required this.quantity,
+    required this.purchaseTime,
+    required this.developerPayload,
+    required this.originalJson,
+    required this.purchaseToken,
+    required this.signature,
+    required this.products,
+  });
+
+  final int quantity;
+  final int purchaseTime;
+  final String? developerPayload;
+  final String originalJson;
+  final String purchaseToken;
+  final String signature;
+  final List<String> products;
+}
+
+/// Pigeon version of PurchasesHistoryResult, which contains the components of
+/// the Java PurchaseHistoryResponseListener callback.
+class PlatformPurchaseHistoryResponse {
+  PlatformPurchaseHistoryResponse({required this.billingResult, required this.purchases});
+
+  final PlatformBillingResult billingResult;
+  final List<PlatformPurchaseHistoryRecord> purchases;
+}
+
+/// Pigeon version of PurchasesResultWrapper, which contains the components of
+/// the Java PurchasesResponseListener callback.
+class PlatformPurchasesResponse {
+  PlatformPurchasesResponse({required this.billingResult, required this.purchases});
+
+  final PlatformBillingResult billingResult;
+  final List<PlatformPurchase> purchases;
+}
+
+/// Pigeon version of Java ProductDetails.SubscriptionOfferDetails.
+class PlatformSubscriptionOfferDetails {
+  PlatformSubscriptionOfferDetails({
+    required this.basePlanId,
+    required this.offerId,
+    required this.offerToken,
+    required this.offerTags,
+    required this.pricingPhases,
+    required this.installmentPlanDetails,
+  });
+
+  final String basePlanId;
+  final String? offerId;
+  final String offerToken;
+  final List<String> offerTags;
+  // On the native side this is actually a class called PricingPhases,
+  // which contains nothing but a List<PricingPhase>. Since this is an
+  // internal API, we can always add that indirection later if we need it,
+  // so for now this bypasses that unnecessary wrapper.
+  final List<PlatformPricingPhase> pricingPhases;
+  final PlatformInstallmentPlanDetails? installmentPlanDetails;
+}
+
+/// Pigeon version of UserChoiceDetailsWrapper and Java UserChoiceDetails.
+class PlatformUserChoiceDetails {
+  PlatformUserChoiceDetails({
+    required this.originalExternalTransactionId,
+    required this.externalTransactionToken,
+    required this.products,
+  });
+
+  final String? originalExternalTransactionId;
+  final String externalTransactionToken;
+  final List<PlatformUserChoiceProduct> products;
+}
+
+/// Pigeon version of UserChoiseDetails.Product.
+class PlatformUserChoiceProduct {
+  PlatformUserChoiceProduct({required this.id, required this.offerToken, required this.type});
+
+  final String id;
+  final String? offerToken;
+  final PlatformProductType type;
+}
+
+/// Pigeon version of ProductDetails.InstallmentPlanDetails.
+/// https://developer.android.com/reference/com/android/billingclient/api/PendingPurchasesParams.Builder#enableOneTimeProducts()
+class PlatformInstallmentPlanDetails {
+  PlatformInstallmentPlanDetails({
+    required this.commitmentPaymentsCount,
+    required this.subsequentCommitmentPaymentsCount,
+  });
+
+  final int commitmentPaymentsCount;
+  final int subsequentCommitmentPaymentsCount;
+}
+
+/// Pigeon version of Java PendingPurchasesParams.
+class PlatformPendingPurchasesParams {
+  PlatformPendingPurchasesParams({required this.enablePrepaidPlans});
+
+  final bool enablePrepaidPlans;
+}
+
+/// Pigeon version of Java [UnfetchedProduct](https://developer.android.com/reference/com/android/billingclient/api/QueryProductDetailsParams.Product).
+class PlatformUnfetchedProduct {
+  PlatformUnfetchedProduct({required this.productId});
+
+  final String productId;
+}
+
+/// Pigeon version of Java BillingClient.ProductType.
+enum PlatformProductType { inapp, subs }
+
+/// Pigeon version of billing_client_wrapper.dart's BillingChoiceMode.
+enum PlatformBillingChoiceMode {
+  /// Billing through google play.
+  ///
+  /// Default state.
+  playBillingOnly,
+
+  /// Billing through app provided flow.
+  alternativeBillingOnly,
+
+  /// Users can choose Play billing or alternative billing.
+  userChoiceBilling,
+}
+
+/// Pigeon version of Java BillingClient.FeatureType.
+enum PlatformBillingClientFeature {
+  alternativeBillingOnly,
+  billingConfig,
+  externalOffer,
+  inAppMessaging,
+  priceChangeConfirmation,
+  productDetails,
+  subscriptions,
+  subscriptionsUpdate,
+}
+
+/// Pigeon version of Java Purchase.PurchaseState.
+enum PlatformPurchaseState { unspecified, purchased, pending }
+
+/// Pigeon version of Java ProductDetails.RecurrenceMode.
+enum PlatformRecurrenceMode { finiteRecurring, infiniteRecurring, nonRecurring }
+
+/// Strict query results are informational, never entitlement authority.
+enum PlatformStrictQueryOutcome { completed, billingError, unsupported, unavailable, timeout, busy, invalidResponse }
+
+class PlatformStrictSubscription {
+  PlatformStrictSubscription({required this.products, required this.purchaseToken, required this.purchaseState, required this.suspended, required this.pendingProducts, this.pendingPurchaseToken});
+  final List<String> products;
+  final String purchaseToken;
+  final int purchaseState;
+  final bool suspended;
+  final List<String> pendingProducts;
+  final String? pendingPurchaseToken;
+}
+
+class PlatformStrictSubscriptionQueryResult {
+  PlatformStrictSubscriptionQueryResult({required this.outcome, required this.suspendedRequested, required this.purchases, this.responseCode, this.featureResponseCode, this.subResponseCode});
+  final PlatformStrictQueryOutcome outcome;
+  final bool suspendedRequested;
+  final List<PlatformStrictSubscription> purchases;
+  final int? responseCode;
+  final int? featureResponseCode;
+  final int? subResponseCode;
+}
+
+@HostApi()
+abstract class InAppPurchaseApi {
+  /// Wraps BillingClient#isReady.
+  bool isReady();
+
+  /// Wraps BillingClient#startConnection(BillingClientStateListener).
+  @async
+  PlatformBillingResult startConnection(
+    int callbackHandle,
+    PlatformBillingChoiceMode billingMode,
+    PlatformPendingPurchasesParams pendingPurchasesParams,
+  );
+
+  /// Wraps BillingClient#endConnection(BillingClientStateListener).
+  void endConnection();
+
+  /// Wraps BillingClient#getBillingConfigAsync(GetBillingConfigParams, BillingConfigResponseListener).
+  @async
+  PlatformBillingConfigResponse getBillingConfigAsync();
+
+  /// Wraps BillingClient#launchBillingFlow(Activity, BillingFlowParams).
+  PlatformBillingResult launchBillingFlow(PlatformBillingFlowParams params);
+
+  /// Wraps BillingClient#acknowledgePurchase(AcknowledgePurchaseParams, AcknowledgePurchaseResponseListener).
+  @async
+  PlatformBillingResult acknowledgePurchase(String purchaseToken);
+
+  /// Wraps BillingClient#consumeAsync(ConsumeParams, ConsumeResponseListener).
+  @async
+  PlatformBillingResult consumeAsync(String purchaseToken);
+
+  /// Wraps BillingClient#queryPurchasesAsync(QueryPurchaseParams, PurchaseResponseListener).
+  @async
+  PlatformPurchasesResponse queryPurchasesAsync(PlatformProductType productType);
+
+  /// Read-only query using the already-installed BillingClient, without retry.
+  @async
+  PlatformStrictSubscriptionQueryResult querySubscriptionsStrict(int timeoutMillis);
+
+  /// Wraps BillingClient#queryProductDetailsAsync(QueryProductDetailsParams, ProductDetailsResponseListener).
+  @async
+  PlatformProductDetailsResponse queryProductDetailsAsync(List<PlatformQueryProduct> products);
+
+  /// Wraps BillingClient#isFeatureSupported(String).
+  bool isFeatureSupported(PlatformBillingClientFeature feature);
+
+  /// Wraps BillingClient#isAlternativeBillingOnlyAvailableAsync().
+  @async
+  PlatformBillingResult isAlternativeBillingOnlyAvailableAsync();
+
+  /// Wraps BillingClient#showAlternativeBillingOnlyInformationDialog().
+  @async
+  PlatformBillingResult showAlternativeBillingOnlyInformationDialog();
+
+  /// Wraps BillingClient#createAlternativeBillingOnlyReportingDetailsAsync(AlternativeBillingOnlyReportingDetailsListener).
+  @async
+  PlatformAlternativeBillingOnlyReportingDetailsResponse
+  createAlternativeBillingOnlyReportingDetailsAsync();
+
+  /// Wraps BillingClient#showInAppMessages().
+  @async
+  PlatformInAppMessageResult showInAppMessages();
+}
+
+@FlutterApi()
+abstract class InAppPurchaseCallbackApi {
+  /// Called for `BillingClientStateListener#onBillingServiceDisconnected()`.
+  void onBillingServiceDisconnected(int callbackHandle);
+
+  /// Called for `PurchasesUpdatedListener#onPurchasesUpdated(BillingResult, List<Purchase>)`.
+  void onPurchasesUpdated(PlatformPurchasesResponse update);
+
+  /// Called for `UserChoiceBillingListener#userSelectedAlternativeBilling(UserChoiceDetails)`.
+  void userSelectedalternativeBilling(PlatformUserChoiceDetails details);
+}
